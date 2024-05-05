@@ -29,6 +29,7 @@ RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
     wget \
     curl \
+    cmake \
     emacs-nox \
     bzip2 \
     ca-certificates \
