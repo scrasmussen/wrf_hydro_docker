@@ -21,7 +21,6 @@ RUN apt-get update \
     libnetcdff7 \
     libopenmpi-dev \
     make \
-    mpich \
     nano \
     netcdf-bin \
     openmpi-bin \
