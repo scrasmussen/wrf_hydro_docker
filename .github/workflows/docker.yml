@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Docker base
+        run: |
+          docker build -t base-image wrf_hydro_docker/docker/base/
+      # - name: Test
+      #   run: |
+      #     docker run --rm base-image
+      # - name: Build Docker dev
+      #   run: |
+      #     docker build -t dev-image wrf_hydro_docker/docker/dev/
