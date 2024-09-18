@@ -1,7 +1,12 @@
+tag=wrfhydro/dev:base
+
 all: build
 
 build:
-	docker build -t wrfhydro/dev:base .
+	docker build -t ${tag} .
 
 run:
-	docker run -it wrfhydro/dev:base
+	docker run -it ${tag}
+
+deploy:
+	docker push ${tag}

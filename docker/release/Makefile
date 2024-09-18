@@ -1,7 +1,12 @@
+tag=wrfhydro/dev:release
+
 all: build
 
 build:
-	docker build -t wrfhydro/dev:release .
+	docker build -t ${tag} .
 
 run:
-	docker run -it wrfhydro/dev:release
+	docker run -it ${tag}
+
+deploy:
+	docker push ${tag}

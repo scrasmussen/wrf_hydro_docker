@@ -1,7 +1,12 @@
+tag=wrfhydro/dev:latest
+
 all: build
 
 build:
-	docker build -t wrfhydro/dev:latest .
+	docker build -t ${tag} .
 
 run:
-	docker run -it -p 8888:8888 wrfhydro/dev:latest
+	docker run -it -p 8888:8888 ${tag}
+
+deploy:
+	docker push ${tag}
