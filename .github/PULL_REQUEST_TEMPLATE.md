@@ -1,4 +1,4 @@
-TYPE: choose one of [fix, enhancement, feature, text only]
+TYPE: choose one of [bugfix, fix, enhancement, feature, text only]
 
 KEYWORDS: approximately 3 to 6 words related to your commit
 

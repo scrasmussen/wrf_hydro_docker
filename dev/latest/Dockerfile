@@ -59,10 +59,12 @@ RUN conda install -y -c conda-forge \
     xrviz
 
 # R packages
-RUN wget https://cran.r-project.org/src/contrib/ncdf4_1.23.tar.gz \
-        && R CMD INSTALL ncdf4_1.23.tar.gz  \
-        && rm ncdf4_1.23.tar.gz \
-        && Rscript -e 'install.packages(c("optparse","stringr","plyr"), repos="https://cran.rstudio.com")'
+
+RUN ver=1.24 \
+    && wget https://cran.r-project.org/src/contrib/ncdf4_${ver}.tar.gz \
+    && R CMD INSTALL ncdf4_${ver}.tar.gz  \
+    && rm ncdf4_${ver}.tar.gz \
+    && Rscript -e 'install.packages(c("optparse","stringr","plyr"), repos="https://cran.rstudio.com")'
 
 # # Jupyter configuration script
 # COPY ./jupyter_notebook_config.py /home/docker/.jupyter/
