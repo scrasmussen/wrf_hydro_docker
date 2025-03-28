@@ -1,8 +1,2 @@
 dev/base/build.sh
-dev/conda/build.sh
-dev/modeltesting/build.sh
-dev/darttesting/build.sh
-wps/build.sh
-training/build.sh
-coupled_training/build.sh
-calibration_demo/build.sh
+dev/latest/build.sh
