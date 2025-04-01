@@ -13,6 +13,7 @@ RUN apt-get update \
     libxml2-dev \
     locales \
     m4 \
+    nco \
     nodejs \
     pkg-config \
     python3-dask \
@@ -24,6 +25,7 @@ RUN apt-get update \
     python3-matplotlib \
     python3-netcdf4 \
     python3-numpy \
+    python3-pip \
     python3-pyproj \
     python3-rasterio \
     python3-toolz \
@@ -45,21 +47,29 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && rm Miniconda3-latest-Linux-x86_64.sh \
     && chown -R docker:docker /home/docker/miniconda3
 ENV PATH="/home/docker/miniconda3/bin:${PATH}"
-RUN conda install -y -c conda-forge \
+RUN conda install mamba -n base -c conda-forge
+RUN mamba install -y -c conda-forge \
     bash_kernel \
     conda-project \
+    dask \
     esmpy \
+    gdal \
     gdown \
+    geopandas \
     hvplot \
     ipyleaflet \
     ipympl \
     jupyterlab \
     jupyter_contrib_nbextensions \
+    mpi4py \
+    openmpi \
+    rasterio \
+    sqlite \
     whitebox \
     xrviz
+RUN chmod -R a+rwx /home/docker/miniconda3/
 
 # R packages
-
 RUN ver=1.24 \
     && wget https://cran.r-project.org/src/contrib/ncdf4_${ver}.tar.gz \
     && R CMD INSTALL ncdf4_${ver}.tar.gz  \
