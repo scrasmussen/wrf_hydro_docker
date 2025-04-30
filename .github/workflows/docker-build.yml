@@ -12,7 +12,7 @@ on:
 jobs:
   docker-build:
     name: Build dev/latest Dockerfile
-    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    if: github.repository == 'NCAR/wrf_hydro_docker'
     runs-on: ubuntu-latest
 
     steps:
