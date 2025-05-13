@@ -73,7 +73,7 @@ echo
 echo -e "\e[0;49;32m-----------------------------------\e[0m"
 echo -e "\e[7;49;32mRetrieving the GIS training\e[0m"
 
-git clone https://github.com/NCAR/GIS_Training
+git clone --depth 1 --branch wrf-hydro-v5.4-updates https://github.com/scrasmussen/GIS_Training
 
 echo "Retrieved the GIS training"
 
