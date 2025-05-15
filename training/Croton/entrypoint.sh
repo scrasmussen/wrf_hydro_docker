@@ -34,6 +34,19 @@ echo "Retrieved the testcase"
 
 echo
 echo -e "\e[0;49;32m-----------------------------------\e[0m"
+echo -e "\e[7;49;32mRetrieving testcase\e[0m"
+
+set -e -x
+wget -nv https://github.com/NCAR/wrf_hydro_nwm_public/releases/download/${version_full}/front_range_CO_example_testcase_coupled.tar.gz
+{ set +x; } 2>/dev/null
+tar -zxf *testcase_coupled.tar.gz
+mv /home/docker/example_case_coupled /home/docker/wrf-hydro-training/example_case_coupled
+rm *testcase_coupled.tar.gz
+echo "Retrieved the testcase"
+
+
+echo
+echo -e "\e[0;49;32m-----------------------------------\e[0m"
 echo -e "\e[7;49;32mRetrieving WRF-Hydro training\e[0m"
 
 set -e -x
