@@ -30,8 +30,11 @@ RUN printf '2\n' | \
 RUN printf '34\n1\n' | VERBOSE=1 ./compile_new -j2
 ENV PATH=/home/docker/WRF_WPS/WPS/install/bin:$PATH
 
-# Now delete WRF to save space
-RUN rm -rf /home/docker/WRF_WPS/WRF
+# Clean-up WRF but keep install directory
+RUN mv /home/docker/WRF_WPS/WRF/install /home/docker/WRF_WPS/wrf_install \
+    && rm -rf /home/docker/WRF_WPS/WRF \
+    && mkdir /home/docker/WRF_WPS/WRF \
+    && mv /home/docker/WRF_WPS/wrf_install /home/docker/WRF_WPS/WRF/install
 
 # ##################################
 RUN install -d -m 0777 \
