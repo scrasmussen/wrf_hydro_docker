@@ -22,13 +22,13 @@ The easiest and recommended way to run the training lessons is via the wrfhydro/
 ## Where to get help and/or post issues
 If you have general questions about Docker, there are ample online resources including the excellent Docker documentation at https://docs.docker.com/.
 
-If you have questions regarding the lessons please contact us here https://ral.ucar.edu/projects/wrf_hydro/contact. 
+If you have questions regarding the lessons please contact us here https://ral.ucar.edu/projects/wrf_hydro/contact.
 
 The best place ask questions or post issues with these lessons is via the Issues page of the GitHub repository at https://github.com/NCAR/wrf_hydro_training/issues.
 
 ## How to run
 Make sure you have Docker installed and that it can access your localhost ports. Most out-of-the-box
-Docker installations accepting all defaults will have this configuration. 
+Docker installations accepting all defaults will have this configuration.
 
 **NOTE: THE DEFAULT DOCKER CONFIGURATION IS FOR 2 CPUS, YOU MUST HAVE AT LEAST 2 CPUS AVAILABLE TO THE DOCKER DAEMON FOR THIS TRAINING**
 
@@ -39,7 +39,7 @@ Docker installations accepting all defaults will have this configuration.
 Each training container is specific to a release version of the WRF-Hydro source code, which can be found at https://github.com/NCAR/wrf_hydro_nwm_public/releases.
 
 Issue the following command in your terminal to pull a specific version of the training
-corresponding to your code release version. 
+corresponding to your code release version.
 
 `docker pull wrfhydro/training:v5.2.0-rc1`
 
@@ -65,3 +65,11 @@ All lessons for this training are contained in the `~/wrf-hydro-training/lessons
 lessons are interactive and can execute code commands live. For more information on jupyter
 notebooks visit the jupyter project page at http://jupyter.org/.
 
+**Reattaching to Existing Docker Container**
+Check if training Docker container already exist.
+
+`docker ps -a`
+
+If it does you can reattach to it.
+
+`docker start -ai [docker container id number]`
