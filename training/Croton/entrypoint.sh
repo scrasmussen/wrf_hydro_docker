@@ -9,6 +9,13 @@ training_branch=enhancement/v5.4.0-updates
 ###########################
 echo -e "\e[4;49;34m WRF-Hydro Training Container\e[0m"
 echo
+
+if [ -d "/home/docker/wrf-hydro-training/wrf_hydro_nwm_public" ]; then
+echo -e "\e[0;49;32m-----------------------------------\e[0m"
+echo -e "\e[7;49;32mStarting up existing container\e[0m"
+echo -e "\e[0;49;32m-----------------------------------\e[0m"
+else
+
 echo -e "\e[0;49;32m-----------------------------------\e[0m"
 echo -e "\e[7;49;32mRetrieving model code\e[0m"
 
@@ -103,6 +110,7 @@ cp wrf_hydro_gis_preprocessor/wrfhydro_gis/Create_Domain_Boundary_Shapefile.py \
 export PYTHONPATH=/home/docker/wrf_hydro_gis_preprocessor/wrfhydro_gis:$PYTHONPATH
 
 echo "Retrieved the GIS preprocessor"
+fi
 
 
 # if flag is true, run CI tests
