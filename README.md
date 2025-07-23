@@ -1,6 +1,7 @@
 #  WRF-Hydro® Docker Images <img src="https://ral.ucar.edu/sites/default/files/public/wrf_hydro_symbol_logo_2017_09_150pxby63px.png" width=100 align="left" />
 
 ![Build](https://github.com/NCAR/wrf_hydro_docker/actions/workflows/docker-build.yml/badge.svg)
+![Push](https://github.com/NCAR/wrf_hydro_docker/actions/workflows/docker-push.yml/badge.svg)
 
 # Description
 
