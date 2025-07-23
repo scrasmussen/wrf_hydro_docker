@@ -21,8 +21,8 @@ jobs:
 
       - name: Build base Docker image
         run: |
-          docker build -t wrfhydro/dev:base -f dev/base/Dockerfile .
+          docker build -t wrfhydro/dev:base dev/base
 
       - name: Build latest Docker image
         run: |
-          docker build -t wrfhydro/dev:latest -f dev/latest/Dockerfile .
+          docker build -t wrfhydro/dev:latest dev/latest
