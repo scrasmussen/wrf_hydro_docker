@@ -41,14 +41,13 @@ RUN apt-get update \
 RUN rm -rf /tmp/*
 RUN chmod -R 777 /home/docker/
 
-# Miniconda and remaining Python packages
+# Miniforge and remaining Python packages
 WORKDIR /home/docker
-RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/docker/miniconda3 \
-    && rm Miniconda3-latest-Linux-x86_64.sh \
-    && chown -R docker:docker /home/docker/miniconda3
-ENV PATH="/home/docker/miniconda3/bin:${PATH}"
-RUN conda install mamba -n base -c conda-forge
+RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh \
+    && bash Miniforge3-Linux-x86_64.sh -b -p /home/docker/miniforge3 \
+    && rm Miniforge3-Linux-x86_64.sh \
+    && chown -R docker:docker /home/docker/miniforge3
+ENV PATH="/home/docker/miniforge3/bin:${PATH}"
 RUN mamba install -y -c conda-forge \
     python=3.12 \
     bash_kernel \
@@ -69,7 +68,7 @@ RUN mamba install -y -c conda-forge \
     sqlite \
     whitebox \
     xrviz
-RUN chmod -R a+rwx /home/docker/miniconda3/
+# RUN chmod -R a+rwx /home/docker/miniforge3/
 
 # R packages
 RUN ver=1.24 \
@@ -84,5 +83,5 @@ RUN ver=1.24 \
 
 USER docker
 WORKDIR /home/docker
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/home/docker/miniconda3/bin
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/home/docker/miniforge3/bin
 ENV SHELL=bash
