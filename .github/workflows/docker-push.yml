@@ -1,0 +1,41 @@
+name: push_docker
+
+on:
+  push:
+    branches:
+      # Only build containers when pushing to main
+      - "main"
+
+env:
+  BASE_TAG: wrfhydro/dev:base
+  LATEST_TAG: wrfhydro/dev:latest
+
+jobs:
+  docker:
+    if: github.repository == 'NCAR/wrf_hydro_docker'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if secrets are defined
+        run: |
+          if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then echo "Username is MISSING"; else echo "Username is SET"; fi
+          if [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then echo "Token is MISSING"; else echo "Token is SET"; fi
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.BASE_TAG}} dev/base
+          docker build -t ${{ env.LATEST_TAG}} dev/latest
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.BASE_TAG }}
+          docker push ${{ env.LATEST_TAG }}
