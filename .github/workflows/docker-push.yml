@@ -1,6 +1,7 @@
 name: docker
 
 on:
+  workflow_dispatch:
   push:
     branches:
       # Only build containers when pushing to main
@@ -9,6 +10,7 @@ on:
 env:
   BASE_TAG: wrfhydro/dev:base
   LATEST_TAG: wrfhydro/dev:latest
+  RELEASE_TAG: wrfhydro/dev:release
 
 jobs:
   docker:
@@ -17,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Check if secrets are defined
         run: |
@@ -25,7 +27,7 @@ jobs:
           if [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then echo "Token is MISSING"; else echo "Token is SET"; fi
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -33,9 +35,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ${{ env.BASE_TAG}} dev/base
+          docker build -t ${{ env.RELEASE_TAG}} dev/release
           docker build -t ${{ env.LATEST_TAG}} dev/latest
 
       - name: Push Docker image
         run: |
           docker push ${{ env.BASE_TAG }}
+          docker push ${{ env.RELEASE_TAG }}
           docker push ${{ env.LATEST_TAG }}
