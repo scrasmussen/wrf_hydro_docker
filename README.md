@@ -13,12 +13,36 @@ Large datasets are sometimes required and are avilable on a public Google Drive 
 Each subdirectory in this repository corresponds to a Docker image on the [WRF-Hydro Docker Hub page]
 (https://hub.docker.com/u/wrfhydro/).
 
-## Where to get help and/or post issues
-If you have general questions about Docker, there are ample online resources including the excellent Docker documentation at https://docs.docker.com/.
+# Build Dockerfiles Locally
 
-The best place ask questions or post issues with these lessons is via the Issues page of the GitHub
-repository at https://github.com/NCAR/wrf_hydro_docker/issues.
+```bash
+$ make build
+```
 
+# Pull Docker Images From Dockerhub
+```bash
+$ docker pull wrfhydro/dev
+or
+$ docker pull wrfhydro/dev:latest
+or
+$ docker pull wrfhydro/dev:base
+or
+$ docker pull wrfhydro/dev:release
+```
+
+# Run Locally Built Dockerfiles
+
+```bash
+$ make run
+or
+$ make run-latest
+or
+$ make run-base
+or
+$ make run-release
+```
+
+For more information checkout [dev/README.md](dev/README.md).
 
 
 # Docker Package and Training Charts
@@ -112,3 +136,10 @@ flowchart TD
                 nldas_mfe_forcing.tar.gz]
   end
 ```
+
+
+# Where to get help and/or post issues
+If you have general questions about Docker, there are ample online resources including the excellent Docker documentation at https://docs.docker.com/.
+
+The best place ask questions or post issues with these lessons is via the Issues page of the GitHub
+repository at https://github.com/NCAR/wrf_hydro_docker/issues.

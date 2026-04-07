@@ -1,2 +1,0 @@
-dev/base/build.sh
-dev/latest/build.sh
