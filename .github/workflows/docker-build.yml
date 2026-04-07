@@ -1,10 +1,7 @@
-# .github/workflows/docker-build.yml
 name: build
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
   schedule:
@@ -12,17 +9,21 @@ on:
 
 jobs:
   docker-build:
-    name: Build dev/latest Dockerfile
+    name: Build Dockerfiles
     if: github.repository == 'NCAR/wrf_hydro_docker'
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Build base Docker image
         run: |
           docker build -t wrfhydro/dev:base dev/base
+
+      - name: Build release Docker image
+        run: |
+          docker build -t wrfhydro/dev:release dev/release
 
       - name: Build latest Docker image
         run: |
