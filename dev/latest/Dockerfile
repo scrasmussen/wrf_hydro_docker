@@ -39,14 +39,16 @@ RUN apt-get update \
 
 # cleanup
 RUN rm -rf /tmp/*
-RUN chmod -R 777 /home/docker/
+RUN chown -R docker:docker /home/docker
+RUN chown -R docker:docker /usr/local/
+
+USER docker
 
 # Miniforge and remaining Python packages
 WORKDIR /home/docker
 RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh \
     && bash Miniforge3-Linux-x86_64.sh -b -p /home/docker/miniforge3 \
-    && rm Miniforge3-Linux-x86_64.sh \
-    && chown -R docker:docker /home/docker/miniforge3
+    && rm Miniforge3-Linux-x86_64.sh
 ENV PATH="/home/docker/miniforge3/bin:${PATH}"
 RUN mamba install -y -c conda-forge \
     python=3.12 \
@@ -68,7 +70,6 @@ RUN mamba install -y -c conda-forge \
     sqlite \
     whitebox \
     xrviz
-# RUN chmod -R a+rwx /home/docker/miniforge3/
 
 # R packages
 RUN ver=1.24 \
@@ -79,9 +80,8 @@ RUN ver=1.24 \
 
 # # Jupyter configuration script
 # COPY ./jupyter_notebook_config.py /home/docker/.jupyter/
-# RUN chmod -R 777 /home/docker/.jupyter
 
-USER docker
-WORKDIR /home/docker
+RUN git clone https://github.com/NCAR/wrf_hydro_nwm_public.git
+
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/home/docker/miniforge3/bin
 ENV SHELL=bash
