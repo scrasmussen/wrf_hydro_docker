@@ -49,9 +49,6 @@ ENV NETCDF_LIB=/usr/local/lib
 ENV NETCDF_INC=/usr/local/include
 
 # create docker user
-RUN useradd -ms /bin/bash docker \
-    && usermod -aG sudo docker \
-    && chmod -R 777 /home/docker/
-
+RUN useradd -ms /bin/bash docker
 USER docker
 WORKDIR /home/docker
