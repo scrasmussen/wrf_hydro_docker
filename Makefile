@@ -1,4 +1,4 @@
-docker_dirs:=dev/base dev/latest dev/release
+docker_dirs:=dev/base dev/release dev/latest
 deploy_dirs:=$(addprefix deploy-,$(docker_dirs))
 
 all: build
@@ -24,9 +24,18 @@ run-latest:
 run-release:
 	@cd dev/release && make run
 
+list:
+	docker images
+	@echo ""
+	docker ps -a
+
 clean:
-	docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' | \
-	awk '$$1 ~ /^wrfhydro\/dev:/ {print}' | \
+	containers=$$(docker ps -aq); \
+	if [ -n "$$containers" ]; then \
+		docker rm $$containers; \
+	fi
+	docker images --format '{{.ID}}' wrfhydro/dev | \
+	sort -u | \
 	xargs -r docker rmi -f
 
 .PHONY: all build $(docker_dirs) deploy $(deploy_dirs)

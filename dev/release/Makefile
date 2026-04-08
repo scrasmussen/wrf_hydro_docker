@@ -1,4 +1,4 @@
-tag=wrfhydro/dev:release
+tag=wrfhydro/dev:v5.4.0
 
 all: build
 
