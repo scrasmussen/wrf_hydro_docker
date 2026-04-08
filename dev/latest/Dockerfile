@@ -16,7 +16,7 @@ RUN apt-get update \
     nco \
     nodejs \
     pkg-config \
-    python3.12 \
+    python3 \
     python3-dask \
     python3-geopandas \
     python3-ipython \
@@ -80,8 +80,6 @@ RUN ver=1.24 \
 
 # # Jupyter configuration script
 # COPY ./jupyter_notebook_config.py /home/docker/.jupyter/
-
-RUN git clone https://github.com/NCAR/wrf_hydro_nwm_public.git
 
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/home/docker/miniforge3/bin
 ENV SHELL=bash

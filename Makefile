@@ -4,6 +4,9 @@ deploy_dirs:=$(addprefix deploy-,$(docker_dirs))
 all: build
 
 build: docker
+build-base: dev/base
+build-release: dev/release
+build-latest: dev/latest
 
 docker: $(docker_dirs)
 $(docker_dirs):

@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:25.10
 USER root
 
 # WRF-Hydro dependencies
@@ -15,7 +15,7 @@ RUN apt-get update \
     less \
     libhdf5-dev \
     libhdf5-openmpi-dev \
-    libnetcdf-pnetcdf-19 \
+    libnetcdf-pnetcdf-22 \
     libnetcdf-dev \
     libnetcdff-dev \
     libnetcdff7 \
@@ -52,3 +52,4 @@ ENV NETCDF_INC=/usr/local/include
 RUN useradd -ms /bin/bash docker
 USER docker
 WORKDIR /home/docker
+RUN git clone https://github.com/NCAR/wrf_hydro_nwm_public.git
