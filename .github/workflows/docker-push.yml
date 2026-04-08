@@ -10,7 +10,7 @@ on:
 env:
   BASE_TAG: wrfhydro/dev:base
   LATEST_TAG: wrfhydro/dev:latest
-  RELEASE_TAG: wrfhydro/dev:release
+  RELEASE_TAG: wrfhydro/dev:v5.4.0
 
 jobs:
   docker:
