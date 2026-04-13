@@ -6,14 +6,28 @@ version_full=${version_short}.0
 training_branch=lsu_training_2026
 ###########################
 
-mkdir -p /home/docker/wrf-hydro-training/
 ###########################
 echo -e "\e[4;49;34m WRF-Hydro Training Container\e[0m"
 echo
 
+echo
+echo -e "\e[0;49;32m-----------------------------------\e[0m"
+echo -e "\e[7;49;32mRetrieving WRF-Hydro training\e[0m"
+
+set -e -x
+git clone --depth 1 --branch ${training_branch} https://github.com/NCAR/wrf_hydro_training wrf-hydro-training
+set +e +x
+echo "Retrieved the training"
+
+
+echo
+echo -e "\e[0;49;32m-----------------------------------\e[0m"
+echo -e "\e[7;49;32mChecking out WRF-Hydro ${version_full} branch\e[0m"
+
 git -C /home/docker/wrf_hydro_nwm_public -c advice.detachedHead=false checkout ${version_full}
 mv /home/docker/wrf_hydro_nwm_public /home/docker/wrf-hydro-training/wrf_hydro_nwm_public
 echo "Checkout out model code ${version_full}"
+
 
 echo
 echo -e "\e[0;49;32m-----------------------------------\e[0m"
@@ -26,15 +40,6 @@ tar -zxf natalbany_River_LA_example.tar.gz
 mv /home/docker/example_case /home/docker/wrf-hydro-training/example_case
 rm *_example.tar.gz
 echo "Retrieved the testcase"
-
-echo
-echo -e "\e[0;49;32m-----------------------------------\e[0m"
-echo -e "\e[7;49;32mRetrieving WRF-Hydro training\e[0m"
-
-set -e -x
-git clone --depth 1 --branch ${training_branch} https://github.com/NCAR/wrf_hydro_training
-set +e +x
-echo "Retrieved the training"
 
 echo
 echo -e "\e[0;49;32m-----------------------------------\e[0m"
